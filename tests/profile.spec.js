@@ -13,6 +13,8 @@ test('3D voyage discovers islands, persists progress and resets',async({page})=>
   await expect(page.locator('#discovery-count')).toContainText('Explorer’s Seal');
   await page.reload();await expect(page.locator('#discovery-count')).toContainText('3 / 3');
   await page.locator('#restart-voyage').click();await expect(page.locator('#discovery-count')).toContainText('0 / 3');
+  await page.locator('[data-island="2"]').click();await expect(page.locator('[data-island="2"]')).toHaveClass(/discovered/,{timeout:20000});
+  await expect(page.locator('#discovery-count')).toContainText('1 / 3');
   expect(errors).toEqual([]);
 });
 

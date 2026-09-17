@@ -103,18 +103,18 @@ function startWorld() {
   for(let n=0;n<8;n++){const angle=n*Math.PI/4;const ray=mesh(new THREE.ConeGeometry(.12,.32,4),palette.gold,ship,1.45,.65+Math.cos(angle)*.36,Math.sin(angle)*.36);ray.rotation.x=angle;}
   const destination=mesh(new THREE.RingGeometry(.32,.4,24),new THREE.MeshBasicMaterial({color:'#ffe0a5',side:THREE.DoubleSide,transparent:true,opacity:.8}),scene);destination.rotation.x=-Math.PI/2;destination.visible=false;
   const raycaster=new THREE.Raycaster(), pointer=new THREE.Vector2(),seaPlane=new THREE.Plane(new THREE.Vector3(0,1,0),0),hit=new THREE.Vector3();
-  let target=null,docked=-1,last=0,time=0,inView=false,contextLost=false;
+  let target=null,docked=-1,last=0,time=0,inView=false,contextLost=false,route=[];
   const keys=new Set();
   function sailTo(x,z){target=new THREE.Vector3(THREE.MathUtils.clamp(x,-21,21),0,THREE.MathUtils.clamp(z,-12,13));destination.position.set(target.x,.2,target.z);destination.visible=true;byId('game-status').textContent='Under sail. Your next discovery is on the horizon.';}
   let pointerStart=null;
   canvas.addEventListener('pointerdown',e=>{pointerStart={x:e.clientX,y:e.clientY};});
-  canvas.addEventListener('pointerup',e=>{if(!pointerStart||Math.hypot(e.clientX-pointerStart.x,e.clientY-pointerStart.y)>7){pointerStart=null;return;}pointerStart=null;const r=canvas.getBoundingClientRect();pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);raycaster.setFromCamera(pointer,camera);if(raycaster.ray.intersectPlane(seaPlane,hit))sailTo(hit.x,hit.z);canvas.focus({preventScroll:true});});
+  canvas.addEventListener('pointerup',e=>{if(!pointerStart||Math.hypot(e.clientX-pointerStart.x,e.clientY-pointerStart.y)>7){pointerStart=null;return;}pointerStart=null;const r=canvas.getBoundingClientRect();pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);raycaster.setFromCamera(pointer,camera);if(raycaster.ray.intersectPlane(seaPlane,hit)){route=[];sailTo(hit.x,hit.z);}canvas.focus({preventScroll:true});});
   canvas.addEventListener('pointercancel',()=>{pointerStart=null;});
   const movement=['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','w','a','s','d'];
-  canvas.addEventListener('keydown',e=>{if(movement.includes(e.key)){e.preventDefault();keys.add(e.key);target=null;destination.visible=false;}});
+  canvas.addEventListener('keydown',e=>{if(movement.includes(e.key)){e.preventDefault();keys.add(e.key);route=[];target=null;destination.visible=false;}});
   window.addEventListener('keyup',e=>keys.delete(e.key));canvas.addEventListener('blur',()=>keys.clear());window.addEventListener('blur',()=>keys.clear());
-  document.querySelectorAll('[data-island]').forEach(button=>button.addEventListener('click',()=>{const i=Number(button.dataset.island);if(contextLost){discover(i);return;}if(docked===i)discover(i);else sailTo(islands[i].x,islands[i].z+3.7);}));
-  byId('restart-voyage').addEventListener('click',()=>{resetProgress();ship.position.set(-16,.45,8);target=null;docked=-1;keys.clear();destination.visible=false;controls.reset();byId('game-status').textContent='A fresh voyage. Tap the water, or choose an island.';});
+  document.querySelectorAll('[data-island]').forEach(button=>button.addEventListener('click',()=>{const i=Number(button.dataset.island);if(contextLost){discover(i);return;}if(docked===i)discover(i);else {route=[{x:islands[i].x,z:12},{x:islands[i].x,z:islands[i].z+3.7}];sailTo(ship.position.x,12);}}));
+  byId('restart-voyage').addEventListener('click',()=>{resetProgress();ship.position.set(-16,.45,8);target=null;route=[];docked=-1;keys.clear();destination.visible=false;controls.reset();byId('game-status').textContent='A fresh voyage. Tap the water, or choose an island.';});
   byId('reset-camera').addEventListener('click',()=>controls.reset());
   canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();contextLost=true;byId('game-status').textContent='3D rendering paused. The island buttons and all tools still work.';});
   canvas.addEventListener('webglcontextrestored',()=>{contextLost=false;byId('game-status').textContent='Back at sea. Choose your next destination.';});
@@ -127,7 +127,7 @@ function startWorld() {
     if(!inView||document.hidden||contextLost){requestAnimationFrame(frame);return;}
     time+=dt;controls.update();
     let dx=(keys.has('ArrowRight')||keys.has('d')?1:0)-(keys.has('ArrowLeft')||keys.has('a')?1:0),dz=(keys.has('ArrowDown')||keys.has('s')?1:0)-(keys.has('ArrowUp')||keys.has('w')?1:0);
-    if(target){dx=target.x-ship.position.x;dz=target.z-ship.position.z;if(Math.hypot(dx,dz)<.15){target=null;destination.visible=false;dx=dz=0;}}
+    if(target){dx=target.x-ship.position.x;dz=target.z-ship.position.z;if(Math.hypot(dx,dz)<.15){target=null;destination.visible=false;dx=dz=0;if(route.length){const next=route.shift();sailTo(next.x,next.z);}}}
     const length=Math.hypot(dx,dz);
     if(length){const step=Math.min(5.5*dt,target?length:Infinity);let nx=ship.position.x+dx/length*step,nz=ship.position.z+dz/length*step;
       // Keep the hull outside the beaches while allowing it to slide along shore.
@@ -135,7 +135,7 @@ function startWorld() {
       ship.position.x=THREE.MathUtils.clamp(nx,-21,21);ship.position.z=THREE.MathUtils.clamp(nz,-12,13);const angle=-Math.atan2(dz,dx);ship.rotation.y+=Math.atan2(Math.sin(angle-ship.rotation.y),Math.cos(angle-ship.rotation.y))*Math.min(1,dt*8);
     }
     const near=islands.findIndex(i=>Math.hypot(ship.position.x-i.x,ship.position.z-i.z)<4.15);
-    if(near!==-1&&near!==docked){docked=near;target=null;keys.clear();destination.visible=false;discover(near);}else if(near===-1)docked=-1;
+    if(near!==-1&&near!==docked){docked=near;target=null;route=[];keys.clear();destination.visible=false;discover(near);}else if(near===-1)docked=-1;
     if(!reducedMotion.matches){
       ship.position.y=.45+Math.sin(time*2)*.065;ship.rotation.x=Math.sin(time*1.5)*.035;ship.rotation.z=Math.sin(time*1.8)*.035;
       for(let n=0;n<pos.count;n++){pos.setY(n,Math.sin(pos.getX(n)*.65+time)*Math.cos(pos.getZ(n)*.6+time*.7)*.09);}pos.needsUpdate=true;
