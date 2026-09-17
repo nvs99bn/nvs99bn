@@ -1,0 +1,42 @@
+name: Quality checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  browser-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Check source formatting
+        run: npm run format:check
+      - name: Build game and check committed bundle
+        run: |
+          npm run build
+          git diff --exit-code -- game.js
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run browser journeys
+        run: npm test
+      - name: Keep failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-failure-evidence
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 7

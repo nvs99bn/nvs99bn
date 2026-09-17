@@ -14,6 +14,8 @@ python -m http.server 8765 --bind 127.0.0.1
 
 Open http://127.0.0.1:8765. Edit `src/game.js` for the Three.js world, then rebuild `game.js`. The committed bundle runs without a CDN. GitHub Pages publishes from `main`, repository root.
 
+The public project story is available in [CASE_STUDY.md](CASE_STUDY.md) and `case-study.html`. Keep claims consistent with shipped functionality and actual checks. The case study credits AI assistance and makes no model-training or traffic claims.
+
 ## Verify
 
 ```sh
@@ -22,6 +24,8 @@ npm test
 ```
 
 Alternatively set `CHROME_PATH` to an installed Chromium executable. Tests cover island discoveries, saved progress, mobile layout, unavailable WebGL, timer controls, notes export, and bookmark validation.
+
+Run `npm run format` before committing. GitHub Actions checks formatting, rebuilds the game to detect a stale bundle, and runs the browser journeys on pushes and pull requests. Dependabot opens dependency update PRs monthly; updates are not merged automatically.
 
 ## Storage and behavior
 

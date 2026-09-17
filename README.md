@@ -18,6 +18,14 @@ I work across Python services and TypeScript interfaces, connecting APIs, improv
 
 My direction is **applied AI engineering**: bringing intelligent tools into usable applications. My foundation is hands-on work across services and interfaces.
 
+### Featured build · The Sunny
+
+A playable profile with a procedural 3D world, browser-local utilities, and automated browser checks. Built with AI assistance, shaped around my One Piece interest.
+
+**[Case study](https://nvs99bn.github.io/nvs99bn/case-study.html)** · **[Architecture](CASE_STUDY.md#architecture)** · **[Source](https://github.com/nvs99bn/nvs99bn)** · **[Test results](https://github.com/nvs99bn/nvs99bn/actions/workflows/quality.yml)**
+
+[![Quality checks](https://github.com/nvs99bn/nvs99bn/actions/workflows/quality.yml/badge.svg)](https://github.com/nvs99bn/nvs99bn/actions/workflows/quality.yml)
+
 ### A little personality, a playable world
 
 <a href="https://nvs99bn.github.io/nvs99bn/#adventure"><img src="assets/grand-line-preview.png" width="100%" alt="Preview of the playable 3D voyage: a pirate ship, lighthouse, tropical notes island, and compass shrine. Click to play." /></a>

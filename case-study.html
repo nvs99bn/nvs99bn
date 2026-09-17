@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#10191e" />
+    <meta
+      name="description"
+      content="Inside The Sunny: an AI-assisted, playable GitHub profile with a procedural Three.js world and useful browser-local tools."
+    />
+    <title>The Sunny — A profile you can explore</title>
+    <link rel="icon" href="assets/voyage.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <a class="skip" href="#case-study">Skip to case study</a>
+    <header class="topbar">
+      <a class="brand" href="./">☼ <span>THE SUNNY</span></a>
+      <nav aria-label="Main navigation">
+        <a href="./#adventure">Play the voyage</a
+        ><a href="https://github.com/nvs99bn/nvs99bn">Source ↗</a>
+      </nav>
+    </header>
+    <main id="case-study" class="case-study">
+      <section class="case-hero">
+        <p class="eyebrow">FIELD NOTES / 001 · PUBLIC BUILD</p>
+        <h1>A profile you can<br /><em>explore.</em></h1>
+        <p class="case-lead">
+          Turning a love of One Piece into a small interactive world—with useful tools and
+          engineering decisions you can inspect.
+        </p>
+        <div class="case-actions">
+          <a class="primary" href="./#adventure">Play the demo ↗</a
+          ><a class="secondary" href="https://github.com/nvs99bn/nvs99bn/blob/main/CASE_STUDY.md"
+            >Read the technical notes ↗</a
+          >
+        </div>
+        <div class="case-tags">
+          <span>Three.js</span><span>JavaScript</span><span>Playwright</span
+          ><span>GitHub Pages</span>
+        </div>
+      </section>
+      <figure class="case-figure">
+        <img
+          src="assets/grand-line-preview.png"
+          width="1120"
+          height="520"
+          alt="The live 3D scene: a small pirate ship sailing between a lighthouse, a tropical hut, and a compass shrine"
+        />
+        <figcaption>
+          Three islands. One public source repository. No account needed to explore.
+        </figcaption>
+      </figure>
+      <section class="case-row">
+        <p class="eyebrow">01 / THE PROBLEM</p>
+        <div>
+          <h2>More than a poster.</h2>
+          <p>
+            The first profile was almost entirely artwork. It expressed a personal interest, but
+            visitors had little to read, inspect, or try. A view badge added a number without
+            reliably identifying who visited.
+          </p>
+          <p>
+            The goal: introduce the person behind the profile, keep the adventurous spirit, and make
+            the experience useful.
+          </p>
+        </div>
+      </section>
+      <section class="case-row">
+        <p class="eyebrow">02 / THE EXPERIENCE</p>
+        <div>
+          <h2>Explore, discover, use.</h2>
+          <p>
+            Sail to islands to learn about Python services, TypeScript interfaces, and an applied AI
+            direction. Collect three discovery stamps, then settle into the focus timer, notes, or
+            link collection.
+          </p>
+          <p>
+            Visitors can also skip the voyage entirely. The engineering summary and every tool are
+            directly accessible.
+          </p>
+          <div class="case-facts">
+            <div><strong>3</strong><span>Discoverable islands</span></div>
+            <div><strong>0</strong><span>Runtime API keys</span></div>
+            <div><strong>Local</strong><span>Notes and bookmarks</span></div>
+          </div>
+        </div>
+      </section>
+      <section class="case-row">
+        <p class="eyebrow">03 / HOW IT FITS</p>
+        <div>
+          <h2>A small, inspectable system.</h2>
+          <div
+            class="system-flow"
+            aria-label="GitHub README links to GitHub Pages, which serves the 3D scene and browser tools"
+          >
+            <div>
+              <span>ENTRANCE</span><strong>GitHub README</strong
+              ><small>Introduction + live demo link</small>
+            </div>
+            <b aria-hidden="true">→</b>
+            <div>
+              <span>EXPERIENCE</span><strong>GitHub Pages</strong
+              ><small>3D scene + browser tools</small>
+            </div>
+            <b aria-hidden="true">→</b>
+            <div>
+              <span>PERSONAL STATE</span><strong>Your browser</strong
+              ><small>Notes + discovery progress</small>
+            </div>
+          </div>
+          <p>
+            Three.js handles the scene. Ordinary HTML keeps the tools and content accessible.
+            esbuild packages the game locally, so it needs no model CDN or application server.
+          </p>
+          <a
+            class="case-inline-link"
+            href="https://github.com/nvs99bn/nvs99bn/blob/main/CASE_STUDY.md#architecture"
+            >Explore the architecture diagram ↗</a
+          >
+        </div>
+      </section>
+      <section class="case-row">
+        <p class="eyebrow">04 / THE CHOICES</p>
+        <div>
+          <h2>Small choices, real consequences.</h2>
+          <div class="decision-list">
+            <article>
+              <h3>Make play optional</h3>
+              <p>
+                Direct destination buttons and text summaries keep information available without a
+                mouse, a completed quest, or WebGL.
+              </p>
+            </article>
+            <article>
+              <h3>Keep notes in the browser</h3>
+              <p>
+                No sign-in and no app upload. The tradeoff is no cross-device sync; text export
+                gives visitors a way to keep their notes.
+              </p>
+            </article>
+            <article>
+              <h3>Use a deadline, not a tick count</h3>
+              <p>
+                The timer recalculates elapsed time after background throttling. Reloading resets
+                it, and it does not promise background notifications.
+              </p>
+            </article>
+            <article>
+              <h3>Remove a misleading metric</h3>
+              <p>
+                The profile has no view counter. Image-based counts cannot distinguish the profile
+                owner from other GitHub viewers.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="case-row">
+        <p class="eyebrow">05 / THE EVIDENCE</p>
+        <div>
+          <h2>Try it. Read it. Check it.</h2>
+          <p>
+            Browser tests cover a complete voyage, saved discoveries, timer controls, notes export,
+            safe bookmark input, mobile layout, and the WebGL fallback. GitHub Actions makes the
+            current results visible.
+          </p>
+          <div class="case-actions">
+            <a
+              class="secondary"
+              href="https://github.com/nvs99bn/nvs99bn/actions/workflows/quality.yml"
+              >View automated checks ↗</a
+            ><a class="secondary" href="https://github.com/nvs99bn/nvs99bn/tree/main/tests"
+              >Read the tests ↗</a
+            >
+          </div>
+          <p class="footnote">
+            The suite runs in Chromium, with software WebGL in CI. It does not establish performance
+            on every device or complete cross-browser and assistive-technology coverage.
+          </p>
+        </div>
+      </section>
+      <aside class="case-credit">
+        <p class="eyebrow">BUILD NOTES</p>
+        <p>
+          Direction and review by <strong>Văn Sơn</strong>. Built with Codex assistance for
+          implementation, generated fan artwork, documentation, and testing. This is a web and
+          graphics project, not a trained AI model. No private company code or project details are
+          included.
+        </p>
+      </aside>
+    </main>
+    <footer>
+      <a class="brand" href="./">☼ <span>THE SUNNY</span></a
+      ><span>Take your time. Enjoy the voyage.</span
+      ><a href="https://github.com/nvs99bn">Back to GitHub ↗</a>
+    </footer>
+  </body>
+</html>

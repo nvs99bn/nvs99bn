@@ -1,39 +1,254 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#10191e">
-  <meta name="description" content="Văn Sơn’s One Piece inspired profile: Python services, TypeScript interfaces, and an applied AI engineering direction. Explore a playable 3D world and practical tools.">
-  <title>The Sunny — Your quiet corner of the Grand Line</title>
-  <link rel="icon" href="assets/voyage.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css"><script src="app.js" defer></script><script src="game.js" defer></script>
-</head>
-<body>
-<a class="skip" href="#main">Skip to tools</a>
-<header class="topbar"><a class="brand" href="#">☼ <span>THE SUNNY</span></a><nav aria-label="Main navigation"><a href="#log-pose">Log Pose</a><a href="#focus">Focus</a><a href="https://github.com/nvs99bn">GitHub ↗</a></nav></header>
-<main id="main">
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-copy"><p class="eyebrow">VĂN SƠN · AI ENGINEERING FOCUS</p><h1>Useful software.<br>A little <em>adventure.</em></h1><p class="intro">I work across Python services and TypeScript interfaces. My direction is applied AI engineering. And yes, I’m a One Piece fan.</p><a class="primary" href="#adventure">Discover my world <span>↗</span></a><div class="hero-meta"><span class="dot"></span> Three islands. A different side of how I build.</div></div>
-    <div class="poster"><img src="assets/wanted-poster.png" alt="Vintage One Piece wanted poster with a straw hat at sunset" width="1536" height="1024"><span class="art-caption">THE ADVENTURE IS YOURS.</span></div>
-  </section>
-  <div class="voyage"><span>SET SAIL</span><img src="assets/voyage.svg" alt="Animated sailing ship" width="960" height="110"><span>STAY CURIOUS</span></div>
-  <section id="adventure" class="adventure" aria-labelledby="adventure-title">
-    <div class="section-heading"><div><p class="eyebrow">A LITTLE WORLD TO GET LOST IN</p><h2 id="adventure-title">The Grand Line · 3D</h2></div><span id="discovery-count" class="discovery-count" role="status">0 / 3 islands discovered</span></div>
-    <div class="map-frame"><canvas id="ocean" width="1100" height="510" tabindex="0" aria-label="3D sailing game. Use arrow keys or W A S D to move, tap the water to sail, or drag to orbit the camera. Alternatively, use the destination buttons below to sail automatically.">Use the destination buttons below to explore each island.</canvas><span class="map-label">EAST BLUE · THREE ISLANDS, ONE ADVENTURE</span><button id="reset-camera" class="camera-reset" aria-label="Reset camera view">↺ Reset view</button></div>
-    <div class="game-toolbar"><p id="game-status" role="status">Tap to sail · Drag to look around · Arrow keys / WASD to steer.</p><button id="restart-voyage" class="text-button">Restart voyage ↺</button></div>
-    <div class="island-shortcuts" role="group" aria-label="Sail to an island"><button class="secondary" data-island="0">◷ Stillwater · My backend work</button><button class="secondary" data-island="1">✎ Ink Isle · My interfaces</button><button class="secondary" data-island="2">⌖ Compass Cay · My AI direction</button></div>
-    <div id="discovery" class="discovery" hidden><div><p class="eyebrow" id="discovery-label">ISLAND DISCOVERED</p><h3 id="discovery-title"></h3><p id="discovery-copy"></p></div><a id="discovery-link" class="primary" href="#focus">Explore island ↗</a></div>
-    <p class="footnote">Discover three sides of my work and earn your Explorer’s Seal. Progress stays in this browser. You can also read the summary or use the tools below without playing.</p>
-  </section>
-  <section class="about-work" aria-label="My engineering work"><div class="section-heading"><div><p class="eyebrow">THE PERSON BEHIND THE SHIP</p><h2>What I bring aboard</h2></div></div><div class="tools-grid"><article class="card"><p class="tool-number">PYTHON & INTEGRATIONS</p><h3>Connect the moving parts</h3><p>API connections, data transformations, and service configuration. I work on the paths that move data between applications.</p></article><article class="card"><p class="tool-number">TYPESCRIPT & INTERFACES</p><h3>Make workflows usable</h3><p>React applications, dashboards, and multilingual interfaces, with attention to the details people encounter every day.</p></article><article class="card"><p class="tool-number">RELIABILITY & TESTING</p><h3>Get the details right</h3><p>Regression tests, timezone handling, and clearer service diagnostics. My AI engineering direction builds on this full-stack foundation.</p></article></div></section>
-  <div class="section-heading"><div><p class="eyebrow">YOUR EVERYDAY COMPANIONS</p><h2>On the deck</h2></div><span class="muted">Small tools. Room to think.</span></div>
-  <div class="tools-grid">
-    <section class="card clock-card" aria-labelledby="clock-title"><div class="card-top"><span class="tool-number">01 / NAVIGATION</span><span aria-hidden="true">◷</span></div><h3 id="clock-title">Ship’s clock</h3><time id="clock">--:--:--</time><p id="date" class="muted"></p><label for="timezone">Time zone</label><select id="timezone"><option value="local">This device</option><option value="Asia/Ho_Chi_Minh">Vietnam · UTC+7</option><option value="UTC">UTC</option><option value="Asia/Tokyo">Tokyo</option><option value="Europe/London">London</option><option value="America/New_York">New York</option></select><p class="footnote">A moment to get your bearings.</p></section>
-    <section class="card" id="focus" aria-labelledby="focus-title"><div class="card-top"><span class="tool-number">02 / CLEAR WATERS</span><span aria-hidden="true">⌛</span></div><h3 id="focus-title">Focus deck</h3><div class="segmented" role="group" aria-label="Timer mode"><button data-minutes="25" aria-pressed="true">Focus · 25</button><button data-minutes="5" aria-pressed="false">Rest · 5</button><button data-minutes="15" aria-pressed="false">Rest · 15</button></div><div id="timer" class="timer" role="timer" aria-label="Time remaining">25:00</div><div class="timer-actions"><button class="primary" id="toggle">Start voyage</button><button class="secondary" id="reset">Reset</button></div><p id="timer-status" class="footnote" role="status">One thing at a time. You’ve got this.</p></section>
-    <section class="card notes-card" id="notes" aria-labelledby="notes-title"><div class="card-top"><span class="tool-number">03 / CAPTAIN’S LOG</span><span aria-hidden="true">✎</span></div><h3 id="notes-title">A place for your thoughts</h3><label class="sr-only" for="notepad">Personal notes</label><textarea id="notepad" placeholder="What’s on the horizon today?&#10;&#10;An idea, a reminder, your next small step…" maxlength="50000"></textarea><div class="notes-bottom"><span id="save-status" class="footnote" role="status">Saved only in this browser.</span><button id="export" class="text-button">Export .txt ↗</button></div></section>
-  </div>
-  <section class="links-section" id="log-pose" aria-labelledby="links-title"><div class="section-heading"><div><p class="eyebrow">FOLLOW YOUR COMPASS</p><h2 id="links-title">Log Pose</h2></div><button id="add-link" class="secondary">+ Add a destination</button></div><label class="sr-only" for="search">Search destinations</label><div class="search-wrap"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Find a destination…" autocomplete="off"><kbd>/</kbd></div><div id="links" class="links-grid"></div><p id="empty" class="muted" hidden>No destinations match. Try another search.</p><p class="footnote">Your added destinations stay in this browser.</p></section>
-</main>
-<footer><a class="brand" href="#">☼ <span>THE SUNNY</span></a><span>Take your time. Enjoy the voyage.</span><a href="https://github.com/nvs99bn">Back to GitHub ↗</a></footer>
-<dialog id="link-dialog"><form id="link-form"><p class="eyebrow">CHART A NEW COURSE</p><h2>Add a destination</h2><label for="link-name">Name</label><input id="link-name" required maxlength="60" placeholder="My favorite tool"><label for="link-url">Website URL</label><input id="link-url" type="url" required placeholder="https://example.com"><p id="link-error" role="alert"></p><div class="timer-actions"><button class="primary" type="submit">Add destination</button><button class="secondary" id="cancel-link" type="button">Cancel</button></div></form></dialog>
-</body></html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#10191e" />
+    <meta
+      name="description"
+      content="Văn Sơn’s One Piece inspired profile: Python services, TypeScript interfaces, and an applied AI engineering direction. Explore a playable 3D world and practical tools."
+    />
+    <title>The Sunny — Your quiet corner of the Grand Line</title>
+    <link rel="icon" href="assets/voyage.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+    <script src="game.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to tools</a>
+    <header class="topbar">
+      <a class="brand" href="#">☼ <span>THE SUNNY</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#log-pose">Log Pose</a><a href="#focus">Focus</a
+        ><a href="https://github.com/nvs99bn">GitHub ↗</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">VĂN SƠN · AI ENGINEERING FOCUS</p>
+          <h1 id="hero-title">Useful software.<br />A little <em>adventure.</em></h1>
+          <p class="intro">
+            I work across Python services and TypeScript interfaces. My direction is applied AI
+            engineering. And yes, I’m a One Piece fan.
+          </p>
+          <a class="primary" href="#adventure">Discover my world <span>↗</span></a>
+          <div class="hero-meta">
+            <span class="dot"></span> Three islands. A different side of how I build.
+          </div>
+        </div>
+        <div class="poster">
+          <img
+            src="assets/wanted-poster.png"
+            alt="Vintage One Piece wanted poster with a straw hat at sunset"
+            width="1536"
+            height="1024"
+          /><span class="art-caption">THE ADVENTURE IS YOURS.</span>
+        </div>
+      </section>
+      <div class="voyage">
+        <span>SET SAIL</span
+        ><img src="assets/voyage.svg" alt="Animated sailing ship" width="960" height="110" /><span
+          >STAY CURIOUS</span
+        >
+      </div>
+      <section id="adventure" class="adventure" aria-labelledby="adventure-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">A LITTLE WORLD TO GET LOST IN</p>
+            <h2 id="adventure-title">The Grand Line · 3D</h2>
+          </div>
+          <span id="discovery-count" class="discovery-count" role="status"
+            >0 / 3 islands discovered</span
+          >
+        </div>
+        <div class="map-frame">
+          <canvas
+            id="ocean"
+            width="1100"
+            height="510"
+            tabindex="0"
+            aria-label="3D sailing game. Use arrow keys or W A S D to move, tap the water to sail, or drag to orbit the camera. Alternatively, use the destination buttons below to sail automatically."
+            >Use the destination buttons below to explore each island.</canvas
+          ><span class="map-label">EAST BLUE · THREE ISLANDS, ONE ADVENTURE</span
+          ><button id="reset-camera" class="camera-reset" aria-label="Reset camera view">
+            ↺ Reset view
+          </button>
+        </div>
+        <div class="game-toolbar">
+          <p id="game-status" role="status">
+            Tap to sail · Drag to look around · Arrow keys / WASD to steer.
+          </p>
+          <button id="restart-voyage" class="text-button">Restart voyage ↺</button>
+        </div>
+        <div class="island-shortcuts" role="group" aria-label="Sail to an island">
+          <button class="secondary" data-island="0">◷ Stillwater · My backend work</button
+          ><button class="secondary" data-island="1">✎ Ink Isle · My interfaces</button
+          ><button class="secondary" data-island="2">⌖ Compass Cay · Featured build</button>
+        </div>
+        <div id="discovery" class="discovery" hidden>
+          <div>
+            <p class="eyebrow" id="discovery-label">ISLAND DISCOVERED</p>
+            <h3 id="discovery-title"></h3>
+            <p id="discovery-copy"></p>
+          </div>
+          <a id="discovery-link" class="primary" href="#focus">Explore island ↗</a>
+        </div>
+        <p class="footnote">
+          Discover three sides of my work and earn your Explorer’s Seal. Progress stays in this
+          browser. You can also read the summary or use the tools below without playing.
+        </p>
+      </section>
+      <section class="about-work" aria-label="My engineering work">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">THE PERSON BEHIND THE SHIP</p>
+            <h2>What I bring aboard</h2>
+          </div>
+        </div>
+        <div class="tools-grid">
+          <article class="card">
+            <p class="tool-number">PYTHON & INTEGRATIONS</p>
+            <h3>Connect the moving parts</h3>
+            <p>
+              API connections, data transformations, and service configuration. I work on the paths
+              that move data between applications.
+            </p>
+          </article>
+          <article class="card">
+            <p class="tool-number">TYPESCRIPT & INTERFACES</p>
+            <h3>Make workflows usable</h3>
+            <p>
+              React applications, dashboards, and multilingual interfaces, with attention to the
+              details people encounter every day.
+            </p>
+          </article>
+          <article class="card">
+            <p class="tool-number">RELIABILITY & TESTING</p>
+            <h3>Get the details right</h3>
+            <p>
+              Regression tests, timezone handling, and clearer service diagnostics. My AI
+              engineering direction builds on this full-stack foundation.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section class="featured-build" aria-labelledby="featured-title">
+        <div>
+          <p class="eyebrow">FEATURED BUILD / THE SUNNY</p>
+          <h2 id="featured-title">Go behind the voyage.</h2>
+          <p>
+            A public case study of this 3D world: the problem, the choices, the source, and the
+            browser tests. Built with AI assistance.
+          </p>
+        </div>
+        <a class="primary" href="case-study.html">Read the case study ↗</a>
+      </section>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">YOUR EVERYDAY COMPANIONS</p>
+          <h2>On the deck</h2>
+        </div>
+        <span class="muted">Small tools. Room to think.</span>
+      </div>
+      <div class="tools-grid">
+        <section class="card clock-card" aria-labelledby="clock-title">
+          <div class="card-top">
+            <span class="tool-number">01 / NAVIGATION</span><span aria-hidden="true">◷</span>
+          </div>
+          <h3 id="clock-title">Ship’s clock</h3>
+          <time id="clock">--:--:--</time>
+          <p id="date" class="muted"></p>
+          <label for="timezone">Time zone</label
+          ><select id="timezone">
+            <option value="local">This device</option>
+            <option value="Asia/Ho_Chi_Minh">Vietnam · UTC+7</option>
+            <option value="UTC">UTC</option>
+            <option value="Asia/Tokyo">Tokyo</option>
+            <option value="Europe/London">London</option>
+            <option value="America/New_York">New York</option>
+          </select>
+          <p class="footnote">A moment to get your bearings.</p>
+        </section>
+        <section class="card" id="focus" aria-labelledby="focus-title">
+          <div class="card-top">
+            <span class="tool-number">02 / CLEAR WATERS</span><span aria-hidden="true">⌛</span>
+          </div>
+          <h3 id="focus-title">Focus deck</h3>
+          <div class="segmented" role="group" aria-label="Timer mode">
+            <button data-minutes="25" aria-pressed="true">Focus · 25</button
+            ><button data-minutes="5" aria-pressed="false">Rest · 5</button
+            ><button data-minutes="15" aria-pressed="false">Rest · 15</button>
+          </div>
+          <div id="timer" class="timer" role="timer" aria-label="Time remaining">25:00</div>
+          <div class="timer-actions">
+            <button class="primary" id="toggle">Start voyage</button
+            ><button class="secondary" id="reset">Reset</button>
+          </div>
+          <p id="timer-status" class="footnote" role="status">
+            One thing at a time. You’ve got this.
+          </p>
+        </section>
+        <section class="card notes-card" id="notes" aria-labelledby="notes-title">
+          <div class="card-top">
+            <span class="tool-number">03 / CAPTAIN’S LOG</span><span aria-hidden="true">✎</span>
+          </div>
+          <h3 id="notes-title">A place for your thoughts</h3>
+          <label class="sr-only" for="notepad">Personal notes</label
+          ><textarea
+            id="notepad"
+            placeholder="What’s on the horizon today?&#10;&#10;An idea, a reminder, your next small step…"
+            maxlength="50000"
+          ></textarea>
+          <div class="notes-bottom">
+            <span id="save-status" class="footnote" role="status">Saved only in this browser.</span
+            ><button id="export" class="text-button">Export .txt ↗</button>
+          </div>
+        </section>
+      </div>
+      <section class="links-section" id="log-pose" aria-labelledby="links-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">FOLLOW YOUR COMPASS</p>
+            <h2 id="links-title">Log Pose</h2>
+          </div>
+          <button id="add-link" class="secondary">+ Add a destination</button>
+        </div>
+        <label class="sr-only" for="search">Search destinations</label>
+        <div class="search-wrap">
+          <span aria-hidden="true">⌕</span
+          ><input
+            id="search"
+            type="search"
+            placeholder="Find a destination…"
+            autocomplete="off"
+          /><kbd>/</kbd>
+        </div>
+        <div id="links" class="links-grid"></div>
+        <p id="empty" class="muted" hidden>No destinations match. Try another search.</p>
+        <p class="footnote">Your added destinations stay in this browser.</p>
+      </section>
+    </main>
+    <footer>
+      <a class="brand" href="#">☼ <span>THE SUNNY</span></a
+      ><span>Take your time. Enjoy the voyage.</span
+      ><a href="https://github.com/nvs99bn">Back to GitHub ↗</a>
+    </footer>
+    <dialog id="link-dialog">
+      <form id="link-form">
+        <p class="eyebrow">CHART A NEW COURSE</p>
+        <h2>Add a destination</h2>
+        <label for="link-name">Name</label
+        ><input id="link-name" required maxlength="60" placeholder="My favorite tool" /><label
+          for="link-url"
+          >Website URL</label
+        ><input id="link-url" type="url" required placeholder="https://example.com" />
+        <p id="link-error" role="alert"></p>
+        <div class="timer-actions">
+          <button class="primary" type="submit">Add destination</button
+          ><button class="secondary" id="cancel-link" type="button">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
