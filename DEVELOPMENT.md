@@ -1,6 +1,6 @@
 # The Sunny
 
-A static One Piece fan-themed profile and companion site. The README links to the 3D voyage on GitHub Pages. No personal biography, skills or project claims are included.
+A static One Piece fan-themed profile and companion site. The README links to the 3D voyage on GitHub Pages. Public copy describes the owner’s applied AI engineering direction and general Python, TypeScript, interface, integration and testing work. Private repository names, code, business details and review evidence are not included.
 
 ## Develop
 

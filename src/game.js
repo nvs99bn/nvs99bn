@@ -4,9 +4,9 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 const byId = id => document.getElementById(id);
 const canvas = byId('ocean');
 const islands = [
-  {x:-12,z:-5,name:'Stillwater',tool:'Focus deck',href:'#focus',copy:'Quiet shores and a clear mind. Drop anchor for a focused session, then take a well-earned break.'},
-  {x:0,z:6,name:'Ink Isle',tool:'Captain’s notes',href:'#notes',copy:'A little harbor for big ideas. Leave a thought, make a plan, or export your notes to take them with you.'},
-  {x:12,z:-5,name:'Compass Cay',tool:'Log Pose',href:'#log-pose',copy:'Every great voyage begins with a direction. Search useful destinations and add your own favorite places.'}
+  {x:-12,z:-5,name:'Stillwater',topic:'My backend work',tool:'Focus deck',href:'#focus',copy:'I work on Python services, API connections, and data transformations. Regression tests and clear diagnostics help keep those moving parts dependable. Take a focused break here before your next destination.'},
+  {x:0,z:6,name:'Ink Isle',topic:'My interfaces',tool:'Captain’s notes',href:'#notes',copy:'My frontend work includes React and TypeScript applications, dashboards, and multilingual workflows. I pay attention to details such as timezone correctness. Use this island’s notepad to capture an idea of your own.'},
+  {x:12,z:-5,name:'Compass Cay',topic:'My AI direction',tool:'Log Pose',href:'#log-pose',copy:'My direction is applied AI engineering: bringing intelligent tools into usable applications. Python services and TypeScript interfaces are the foundation I bring to that journey. My One Piece interest inspired this little world.'}
 ];
 let visited = new Set();
 try { const saved=JSON.parse(localStorage.getItem('sunny.islands')||'[]'); if(Array.isArray(saved)) visited=new Set(saved.filter(i=>Number.isInteger(i)&&i>=0&&i<3)); } catch {}
@@ -18,7 +18,7 @@ function discover(index) {
   visited.add(index); try {localStorage.setItem('sunny.islands',JSON.stringify([...visited]));}catch{}
   const island=islands[index]; progress(); byId('discovery').hidden=false;
   byId('discovery-label').textContent=visited.size===3?'EXPLORER’S SEAL EARNED · ALL ISLANDS DISCOVERED':'LANDFALL · ISLAND DISCOVERED';
-  byId('discovery-title').textContent=`${island.name} — ${island.tool}`;
+  byId('discovery-title').textContent=`${island.name} — ${island.topic}`;
   byId('discovery-copy').textContent=island.copy;
   byId('discovery-link').href=island.href;byId('discovery-link').textContent=`Open ${island.tool} ↗`;
   byId('game-status').textContent=`Docked at ${island.name}. Your discovery is below the chart.`;
