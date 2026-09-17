@@ -28,5 +28,5 @@ Alternatively set `CHROME_PATH` to an installed Chromium executable. Tests cover
 - Notes, timezone, added links and game discoveries stay in the visitor’s browser local storage. They are not sent to a server or shared with other visitors. Clearing browser data removes them. Notes can be exported as text.
 - The timer uses a wall-clock deadline while the page remains open. Reloading resets it. Leaving the tab does not guarantee a background notification.
 - Tools are available without completing the game. Reduced-motion settings disable decorative scene movement. Buttons remain usable when WebGL is unavailable.
-- The README uses Komarev’s external approximate page-view counter. It does not show unique visitors or people currently online; GitHub caching can delay updates.
+- The README has no visitor counter. Image counters cannot identify GitHub viewers or exclude the profile owner, so they cannot meet the requirement to count only other accounts.
 - The artwork is One Piece fan art. The 3D scene is built from code. Three.js is distributed under its MIT license, included in `THIRD_PARTY_LICENSES.txt`.
