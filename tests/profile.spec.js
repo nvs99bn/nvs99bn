@@ -27,6 +27,19 @@ test('3D voyage discovers islands, persists progress and resets', async ({ page 
   expect(errors).toEqual([]);
 });
 
+test('navigation preserves elapsed time with a slow animation loop', async ({ page }) => {
+  await page.addInitScript(() => {
+    const nativeFrame = window.requestAnimationFrame.bind(window);
+    window.requestAnimationFrame = (callback) =>
+      nativeFrame(() => setTimeout(() => callback(performance.now()), 125));
+  });
+  await page.goto('/#adventure');
+  await expect(page.locator('#ocean')).toHaveAttribute('data-ready', 'true');
+  await page.locator('[data-island="2"]').click();
+  await expect(page.locator('[data-island="2"]')).toHaveClass(/discovered/, { timeout: 15000 });
+  await expect(page.locator('#discovery-count')).toContainText('1 / 3');
+});
+
 test('timer, browser notes, export and safe searchable destinations', async ({ page }) => {
   await page.goto('/');
   await page.locator('[data-minutes="5"]').click();

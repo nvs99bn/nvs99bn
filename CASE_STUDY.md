@@ -51,6 +51,8 @@ flowchart LR
 
 The automated suite exercises user journeys in Chromium, including a narrow viewport and a reduced-motion setting. It uses a software WebGL renderer in CI. This does not establish performance on every phone, full screen-reader compatibility, or broad cross-browser support. No invented traffic, conversion, FPS or AI benchmark claims are included.
 
+The first hosted run exposed a real timing problem: a 50 ms frame-delta cap slowed navigation below 20 FPS. The cap was raised to 250 ms, keeping movement steps smaller than an island radius. A deliberately slowed animation-loop test now covers the regression; this is a navigation-correctness check, not a rendering-performance benchmark.
+
 Decorative scene motion pauses when reduced motion is requested. Rendering is skipped while the game is out of view or the document is hidden. The scene has a text-and-button fallback when WebGL is unavailable.
 
 ## Role and provenance

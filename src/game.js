@@ -493,7 +493,10 @@ function startWorld() {
   ).observe(canvas);
   const projected = new THREE.Vector3();
   function frame(now) {
-    const dt = Math.min((now - last) / 1000 || 0, 0.05);
+    // Preserve elapsed time on slower renderers. A 50 ms cap made voyages
+    // run in slow motion below 20 FPS. Limit only long stalls; at 250 ms
+    // the maximum movement step is still smaller than an island radius.
+    const dt = Math.min((now - last) / 1000 || 0, 0.25);
     last = now;
     if (!inView || document.hidden || contextLost) {
       requestAnimationFrame(frame);
